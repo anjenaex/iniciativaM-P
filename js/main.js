@@ -31,8 +31,6 @@ class Turno {
 
         this.turno++;
 
-        this.añadirParticipantes();
-
     };
 
     añadirParticipantes() {
@@ -82,8 +80,8 @@ class Turno {
     }
 }
 
-turno = new Turno;
+let turno = new Turno();
+
 turno.obtenerParticipaciones();
 turno.getIniciativa();
-console.log(turno.numeroDeAcciones);
-// console.log(turno.iniciativa);
+console.log(turno.numeroDeAcciones)
