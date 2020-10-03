@@ -14,28 +14,32 @@ class Participante {
 
 class Turno {
 
-    static turno = 0;
+    static _estres = 0;
 
-    participante0;
-    participante1 = new Participante('villa', 7, 1);
-    participante2 = new Participante('romu', 9, 0);
-    participante3 = new Participante('elif', 7, 2);
-    participante4 = new Participante('navarro', 6, 2);
-
-    participantes = [];
+    participantes = [
+        new Participante('Taro Korosu ', 7, 1),
+        new Participante('Dunia ', 8, 2),
+        new Participante('Hid Mortom ', 8, 1),
+        new Participante('Ruh Crawfort ', 7, 0),
+        // new Participante('enemigo 1 ', 7, 1),
+        // new Participante('enemigo 2 ', 7, 1),
+        // new Participante('enemigo 3 ', 7, 1),
+        // new Participante('enemigo 4 ', 7, 1),
+        // new Participante('enemigo 5 ', 7, 1),
+        // new Participante('jefe final ', 10, 2)
+    ];
     numeroDeAcciones = [];
     iniciativa = [];
-    contador = [];
+
 
     constructor() {
 
-        this.turno++;
 
-    };
 
-    añadirParticipantes() {
+        this.obtenerParticipaciones();
+        this.getIniciativa();
 
-        this.participantes.push(this.participante1, this.participante2, this.participante3, this.participante4);
+
     }
 
     obtenerParticipaciones() {
@@ -43,14 +47,14 @@ class Turno {
         for (let i = 0; i < this.participantes.length; i++) {
 
             if (this.participantes[i].hab <= 6) {
-                this.numeroDeAcciones.push(this.participantes[i]);
+                this.numeroDeAcciones.push(this.participantes[i].nombre);
             } else if (this.participantes[i].hab == 7 || this.participantes[i].hab == 8) {
-                this.numeroDeAcciones.push(this.participantes[i]);
-                this.numeroDeAcciones.push(this.participantes[i]);
+                this.numeroDeAcciones.push(this.participantes[i].nombre);
+                this.numeroDeAcciones.push(this.participantes[i].nombre);
             } else if (this.participantes[i].hab == 9 || this.participantes[i].hab == 10) {
-                this.numeroDeAcciones.push(this.participantes[i]);
-                this.numeroDeAcciones.push(this.participantes[i]);
-                this.numeroDeAcciones.push(this.participantes[i]);
+                this.numeroDeAcciones.push(this.participantes[i].nombre);
+                this.numeroDeAcciones.push(this.participantes[i].nombre);
+                this.numeroDeAcciones.push(this.participantes[i].nombre);
             } else {
                 console.log('hubo un error')
             }
@@ -80,8 +84,27 @@ class Turno {
     }
 }
 
+let contadorTurnos = -1;
 let turno = new Turno();
 
-turno.obtenerParticipaciones();
-turno.getIniciativa();
-console.log(turno.numeroDeAcciones)
+
+$(document).ready(function() {
+
+    $('#aumentarEstres').click(function() {
+
+        contadorTurnos++;
+        document.getElementById("display").innerHTML = contadorTurnos;
+
+    });
+
+    $('#botonIniciativa').click(function() {
+
+        contadorTurnos++;
+        document.getElementById("display").innerHTML = contadorTurnos;
+        turno = new Turno();
+        console.log(turno.numeroDeAcciones);
+        document.getElementById("iniciativa").innerHTML = turno.numeroDeAcciones;
+
+    });
+
+});
